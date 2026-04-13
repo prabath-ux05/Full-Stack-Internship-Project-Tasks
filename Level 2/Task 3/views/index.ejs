@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aether — The modern workspace for teams. Manage projects, collaborate in real-time, and ship faster.">
+  <title><%= title %></title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          animation: {
+            'float': 'float 6s ease-in-out infinite',
+            'float-delayed': 'float 6s ease-in-out 2s infinite',
+            'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
+            'fade-in': 'fadeIn 0.8s ease-out forwards',
+            'slide-in-right': 'slideInRight 0.5s ease-out forwards',
+            'scale-in': 'scaleIn 0.4s ease-out forwards',
+            'shimmer': 'shimmer 2s linear infinite',
+            'glow-pulse': 'glowPulse 3s ease-in-out infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-20px)' },
+            },
+            fadeInUp: {
+              '0%': { opacity: '0', transform: 'translateY(30px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideInRight: {
+              '0%': { opacity: '0', transform: 'translateX(-20px)' },
+              '100%': { opacity: '1', transform: 'translateX(0)' },
+            },
+            scaleIn: {
+              '0%': { opacity: '0', transform: 'scale(0.9)' },
+              '100%': { opacity: '1', transform: 'scale(1)' },
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '-200% 0' },
+              '100%': { backgroundPosition: '200% 0' },
+            },
+            glowPulse: {
+              '0%, 100%': { opacity: '0.4' },
+              '50%': { opacity: '0.8' },
+            },
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="font-sans antialiased bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-500">
+
+  <%- include('partials/navbar') %>
+
+  <main>
+    <!-- ━━━ HERO SECTION ━━━ -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+      
+      <!-- Background effects -->
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <!-- Grid pattern -->
+        <div class="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(139,92,246,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.06)_1px,transparent_1px)] bg-[size:60px_60px]"></div>
+        <!-- Gradient orbs -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-violet-500/10 dark:bg-violet-500/20 rounded-full blur-3xl animate-glow-pulse"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500/10 dark:bg-indigo-500/15 rounded-full blur-3xl animate-glow-pulse" style="animation-delay: 1.5s"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/5 dark:bg-purple-500/10 rounded-full blur-3xl"></div>
+      </div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+        <div class="text-center max-w-4xl mx-auto">
+          
+          <!-- Badge -->
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-violet-50 dark:bg-violet-500/10 border border-violet-200 dark:border-violet-500/20 mb-8 animate-fade-in-up opacity-0" style="animation-delay: 0.1s">
+            <span class="w-2 h-2 rounded-full bg-violet-500 animate-pulse"></span>
+            <span class="text-sm font-medium text-violet-700 dark:text-violet-300">Now in Public Beta — v2.0</span>
+          </div>
+
+          <!-- Headline -->
+          <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6 animate-fade-in-up opacity-0" style="animation-delay: 0.2s">
+            <span class="block">Orchestrate brilliance with</span>
+            <span class="bg-gradient-to-r from-violet-600 via-indigo-600 to-purple-600 dark:from-violet-400 dark:via-indigo-400 dark:to-purple-400 bg-clip-text text-transparent">Aether Engine</span>
+          </h1>
+
+          <!-- Subtitle -->
+          <p class="text-lg sm:text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in-up opacity-0" style="animation-delay: 0.35s">
+            Aether is the next-generation workspace where high-performance teams plan, sync, and deliver complex products at scale.
+          </p>
+
+          <!-- CTA Buttons -->
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-fade-in-up opacity-0" style="animation-delay: 0.5s">
+            <a href="/pricing" class="group relative inline-flex items-center gap-2 px-8 py-4 rounded-2xl text-base font-semibold text-white bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 shadow-xl shadow-violet-500/25 hover:shadow-violet-500/40 transition-all duration-300 hover:-translate-y-1 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:ring-offset-2 dark:focus:ring-offset-gray-950 w-full sm:w-auto justify-center">
+              Start for Free
+              <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+              </svg>
+            </a>
+            <a href="/pricing" class="group inline-flex items-center gap-2 px-8 py-4 rounded-2xl text-base font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 hover:-translate-y-1 active:translate-y-0 border border-gray-200 dark:border-gray-700 w-full sm:w-auto justify-center">
+              <svg class="w-5 h-5 text-violet-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              Watch Demo
+            </a>
+          </div>
+
+          <!-- Social proof -->
+          <div class="animate-fade-in-up opacity-0" style="animation-delay: 0.65s">
+            <p class="text-sm text-gray-400 dark:text-gray-500 mb-4 font-medium">Trusted by 2,000+ teams worldwide</p>
+            <div class="flex items-center justify-center gap-8 opacity-50 dark:opacity-30 grayscale">
+              <div class="text-3xl font-bold tracking-tight text-gray-400">Stripe</div>
+              <div class="text-3xl font-bold tracking-tight text-gray-400">Vercel</div>
+              <div class="hidden sm:block text-3xl font-bold tracking-tight text-gray-400">Linear</div>
+              <div class="hidden md:block text-3xl font-bold tracking-tight text-gray-400">Notion</div>
+              <div class="hidden lg:block text-3xl font-bold tracking-tight text-gray-400">Figma</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero visual / Dashboard preview -->
+        <div class="mt-16 lg:mt-20 relative animate-fade-in-up opacity-0" style="animation-delay: 0.8s">
+          <div class="relative rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl shadow-gray-900/10 dark:shadow-black/40 border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+            <!-- Mock browser bar -->
+            <div class="flex items-center gap-2 px-4 py-3 bg-gray-50 dark:bg-gray-800/80 border-b border-gray-200 dark:border-gray-700/60">
+              <div class="flex gap-1.5">
+                <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+                <div class="w-3 h-3 rounded-full bg-green-400"></div>
+              </div>
+              <div class="flex-1 flex justify-center">
+                <div class="px-4 py-1 rounded-lg bg-gray-200/60 dark:bg-gray-700/60 text-xs text-gray-400 dark:text-gray-500 font-mono">app.Aether.dev/dashboard</div>
+              </div>
+            </div>
+            <!-- Dashboard content -->
+            <div class="p-6 lg:p-8 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-950">
+              <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <div class="rounded-xl bg-white dark:bg-gray-800/60 border border-gray-100 dark:border-gray-700/40 p-4 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
+                  <div class="text-sm text-gray-400 dark:text-gray-500 mb-1">Active Projects</div>
+                  <div class="text-2xl font-bold text-gray-900 dark:text-white">24</div>
+                  <div class="text-xs text-emerald-500 font-medium mt-1">↑ 12%</div>
+                </div>
+                <div class="rounded-xl bg-white dark:bg-gray-800/60 border border-gray-100 dark:border-gray-700/40 p-4 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
+                  <div class="text-sm text-gray-400 dark:text-gray-500 mb-1">Team Members</div>
+                  <div class="text-2xl font-bold text-gray-900 dark:text-white">148</div>
+                  <div class="text-xs text-emerald-500 font-medium mt-1">↑ 8%</div>
+                </div>
+                <div class="rounded-xl bg-white dark:bg-gray-800/60 border border-gray-100 dark:border-gray-700/40 p-4 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
+                  <div class="text-sm text-gray-400 dark:text-gray-500 mb-1">Tasks Done</div>
+                  <div class="text-2xl font-bold text-gray-900 dark:text-white">1,284</div>
+                  <div class="text-xs text-emerald-500 font-medium mt-1">↑ 23%</div>
+                </div>
+                <div class="rounded-xl bg-white dark:bg-gray-800/60 border border-gray-100 dark:border-gray-700/40 p-4 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
+                  <div class="text-sm text-gray-400 dark:text-gray-500 mb-1">Velocity</div>
+                  <div class="text-2xl font-bold text-gray-900 dark:text-white">94%</div>
+                  <div class="text-xs text-emerald-500 font-medium mt-1">↑ 5%</div>
+                </div>
+              </div>
+              <!-- Mini chart bars -->
+              <div class="flex items-end gap-1.5 h-24 px-2">
+                <% const heights = [40, 65, 50, 80, 60, 90, 70, 95, 55, 75, 85, 60, 70, 80, 55, 90, 65, 100, 75, 85]; %>
+                <% heights.forEach((h, i) => { %>
+                  <div class="flex-1 rounded-t-md bg-gradient-to-t from-violet-500/80 to-indigo-500/60 dark:from-violet-500/60 dark:to-indigo-400/40 transition-all duration-300 hover:from-violet-500 hover:to-indigo-500" style="height: <%= h %>%"></div>
+                <% }) %>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Floating glow -->
+          <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-gradient-to-t from-violet-500/10 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ━━━ FEATURES SECTION ━━━ -->
+    <section class="relative py-24 lg:py-32 overflow-hidden" id="features">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section header -->
+        <div class="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-50 dark:bg-violet-500/10 text-violet-600 dark:text-violet-400 text-xs font-semibold uppercase tracking-wider mb-4">
+            Features
+          </div>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">
+            Everything you need to <span class="bg-gradient-to-r from-violet-600 to-indigo-600 dark:from-violet-400 dark:to-indigo-400 bg-clip-text text-transparent">ship faster</span>
+          </h2>
+          <p class="text-lg text-gray-500 dark:text-gray-400 leading-relaxed">
+            Powerful features designed for modern teams who demand excellence.
+          </p>
+        </div>
+
+        <!-- Feature cards -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          
+          <% const features = [
+            { icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4', title: 'Smart Task Management', desc: 'AI-powered task prioritization and automated workflows.', details: 'Aether uses advanced machine learning to prioritize your backlog based on historical velocity, team capacity, and project deadlines. Automate repetitive assignments and keep your sprints on track without the manual overhead.' },
+            { icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z', title: 'Real-Time Collaboration', desc: 'Work together in real-time with live cursors and instant updates.', details: 'Experience true live collaboration. See precisely where your teammates are working with multi-colored cursors. Share documents, edit layouts, and leave contextual comments that appear instantly across everyone\'s screen.' },
+            { icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z', title: 'Advanced Analytics', desc: 'Deep insights into team performance and project health.', details: 'Turn your project data into actionable intelligence. Visualize cycle times, identify bottlenecks before they happen, and generate executive reports in one click. Our analytics engine helps you predict delivery dates with 95% accuracy.' },
+            { icon: 'M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z', title: 'Custom Dashboards', desc: 'Build personalized views with drag-and-drop widgets.', details: 'No two teams work the same. Build your ultimate cockpit using our library of interactive widgets. Track specific PRs, monitoring alerts, or specialized KPIs exactly how you want them. Save and share dashboard templates across your organization.' },
+            { icon: 'M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z', title: 'Enterprise Security', desc: 'SOC2 compliant and encrypted storage with granular controls.', details: 'We take security personally. All data is encrypted with AES-256 at rest and in transit. Manage access via SSO (Okta, Azure AD), enforce 2FA company-wide, and maintain a full audit trail of every action taken in your workspace.' },
+            { icon: 'M13 10V3L4 14h7v7l9-11h-7z', title: 'Lightning Fast', desc: 'Built for speed with sub-100ms interactions.', details: 'Built on a globally distributed architecture, Aether ensures zero latency no matter where your team is. From instant search that queries millions of tasks in milliseconds to our optimized DOM engine, everything feels buttery smooth.' }
+          ] %>
+
+          <% features.forEach((f, i) => { %>
+            <div role="button" onclick="openFeatureModal('<%= f.title %>', '<%= f.details %>', this.querySelector('svg').outerHTML)" class="group relative rounded-2xl p-6 lg:p-8 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-violet-300 dark:hover:border-violet-500/40 hover:shadow-xl hover:shadow-violet-500/5 dark:hover:shadow-violet-500/10 transition-all duration-500 hover:-translate-y-1 cursor-pointer">
+              <!-- Icon -->
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-100 to-indigo-100 dark:from-violet-500/20 dark:to-indigo-500/20 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-violet-500/20 transition-all duration-300">
+                <svg class="w-6 h-6 text-violet-600 dark:text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="<%- f.icon %>"/>
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors duration-300"><%= f.title %></h3>
+              <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed"><%= f.desc %></p>
+              
+              <!-- Hover arrow -->
+              <div class="mt-4 flex items-center gap-1.5 text-sm font-medium text-violet-600 dark:text-violet-400 opacity-0 group-hover:opacity-100 translate-x-[-8px] group-hover:translate-x-0 transition-all duration-300">
+                Learn more
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                </svg>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+    </section>
+
+    <!-- ━━━ HOW IT WORKS SECTION ━━━ -->
+    <section class="py-24 lg:py-32 bg-white dark:bg-gray-950 overflow-hidden border-t border-gray-100 dark:border-gray-800/40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-20">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-50 dark:bg-violet-500/10 text-violet-600 dark:text-violet-400 text-xs font-semibold uppercase tracking-wider mb-4 animate-fade-in">
+            Seamless Onboarding
+          </div>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">Your journey to <span class="bg-gradient-to-r from-violet-600 to-indigo-600 dark:from-violet-400 dark:to-indigo-400 bg-clip-text text-transparent">success</span></h2>
+          <p class="text-lg text-gray-500 dark:text-gray-400 leading-relaxed italic">"Simplicity is the ultimate sophistication."</p>
+        </div>
+
+        <div class="relative">
+          <!-- Connector Line (Desktop) -->
+          <div class="hidden lg:block absolute top-12 left-0 w-full h-0.5 bg-gradient-to-r from-violet-100 via-indigo-100 to-violet-100 dark:from-violet-500/10 dark:via-indigo-500/10 dark:to-violet-500/10 -z-10"></div>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-16 gap-x-8 lg:gap-12">
+            <% const steps = [
+              { num: '01', title: 'Explore Aether', desc: 'Discover our workspace built for speed and collaboration.', icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' },
+              { num: '02', title: 'Pick a Plan', desc: 'Select the perfect pricing tier for your team size.', icon: 'M7 7h10M7 12h10m-10 5h10' },
+              { num: '03', title: 'Create Account', desc: 'Sign up in seconds and join the workspace.', icon: 'M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z' },
+              { num: '04', title: 'Launch Projects', desc: 'Create your first project and invite your team.', icon: 'M12 4v16m8-8H4' },
+              { num: '05', title: 'Collaborate', desc: 'Work in real-time with live cursors and chat.', icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z' },
+              { num: '06', title: 'Track Progress', desc: 'Monitor analytics and hit your deadlines.', icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z' }
+            ] %>
+
+            <% steps.forEach((step, idx) => { %>
+              <div class="relative group" data-animate>
+                <div class="mb-6 flex items-center justify-center lg:justify-start">
+                  <div class="relative">
+                    <div class="w-16 h-16 rounded-2xl bg-white dark:bg-gray-900 border-2 border-violet-500/20 dark:border-violet-500/40 flex items-center justify-center text-violet-600 dark:text-violet-400 group-hover:border-violet-600 transition-all duration-300 group-hover:scale-110 shadow-lg shadow-violet-500/5 group-hover:shadow-violet-500/20">
+                      <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="<%= step.icon %>"/>
+                      </svg>
+                    </div>
+                    <!-- Number Badge -->
+                    <div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-violet-600 text-white text-[10px] font-bold flex items-center justify-center border-4 border-white dark:border-gray-950">
+                      <%= step.num %>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-center lg:text-left">
+                  <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-violet-600 transition-colors"><%= step.title %></h3>
+                  <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed px-4 lg:px-0">
+                    <%= step.desc %>
+                  </p>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ━━━ STATS SECTION ━━━ -->
+    <section class="py-20 bg-gradient-to-br from-violet-600 via-indigo-600 to-purple-700 dark:from-violet-900/80 dark:via-indigo-900/80 dark:to-purple-900/80 relative overflow-hidden">
+      <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 text-center">
+          <% const stats = [
+            { value: '10K+', label: 'Active Users' },
+            { value: '99.9%', label: 'Uptime SLA' },
+            { value: '50M+', label: 'Tasks Completed' },
+            { value: '4.9', label: 'User Rating' }
+          ] %>
+          <% stats.forEach(s => { %>
+            <div class="group">
+              <div class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-2 group-hover:scale-105 transition-transform duration-300"><%= s.value %></div>
+              <div class="text-sm sm:text-base text-violet-200 dark:text-violet-300 font-medium"><%= s.label %></div>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+    </section>
+
+    <!-- ━━━ TESTIMONIALS SECTION ━━━ -->
+    <section class="py-24 lg:py-32 bg-gray-50 dark:bg-gray-900/50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-50 dark:bg-violet-500/10 text-violet-600 dark:text-violet-400 text-xs font-semibold uppercase tracking-wider mb-4">
+            Testimonials
+          </div>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">
+            Loved by <span class="bg-gradient-to-r from-violet-600 to-indigo-600 dark:from-violet-400 dark:to-indigo-400 bg-clip-text text-transparent">teams everywhere</span>
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
+          <% const testimonials = [
+            { name: 'Sarah Chen', role: 'CTO, TechFlow', text: 'Aether transformed how we manage our engineering sprints. The real-time collaboration alone saved us 15 hours a week.', avatar: 'SC' },
+            { name: 'Marcus Rivera', role: 'PM, ScaleUp', text: 'We evaluated 12 project management tools. Aether was the only one that didn\'t require a manual. Our team adopted it in days, not weeks.', avatar: 'MR' },
+            { name: 'Alex Thompson', role: 'Lead Dev, InnovateCo', text: 'The analytics dashboard gives us visibility into every sprint. We\'ve improved our delivery predictability by 40% since switching.', avatar: 'AT' }
+          ] %>
+          <% testimonials.forEach(t => { %>
+            <div class="group rounded-2xl p-6 lg:p-8 bg-white dark:bg-gray-800/60 border border-gray-200 dark:border-gray-700/60 hover:border-violet-300 dark:hover:border-violet-500/40 hover:shadow-xl hover:shadow-violet-500/5 transition-all duration-500 hover:-translate-y-1">
+              <!-- Stars -->
+              <div class="flex gap-1 mb-4">
+                <% for(let i = 0; i < 5; i++) { %>
+                  <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <% } %>
+              </div>
+              <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-6 text-sm lg:text-base">"<%= t.text %>"</p>
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center text-white text-sm font-bold shadow-lg shadow-violet-500/20"><%= t.avatar %></div>
+                <div>
+                  <div class="text-sm font-semibold text-gray-900 dark:text-white"><%= t.name %></div>
+                  <div class="text-xs text-gray-500 dark:text-gray-400"><%= t.role %></div>
+                </div>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+    </section>
+
+    <!-- ━━━ CTA SECTION ━━━ -->
+    <section class="py-24 lg:py-32 relative overflow-hidden">
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-violet-500/5 dark:bg-violet-500/10 rounded-full blur-3xl"></div>
+      </div>
+      <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-6">
+          Ready to build <span class="bg-gradient-to-r from-violet-600 to-indigo-600 dark:from-violet-400 dark:to-indigo-400 bg-clip-text text-transparent">something great?</span>
+        </h2>
+        <p class="text-lg text-gray-500 dark:text-gray-400 max-w-xl mx-auto mb-10 leading-relaxed">
+          Join thousands of teams who use Aether to ship products faster. Start your free trial today — no credit card required.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="/pricing" class="group inline-flex items-center gap-2 px-8 py-4 rounded-2xl text-base font-semibold text-white bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 shadow-xl shadow-violet-500/25 hover:shadow-violet-500/40 transition-all duration-300 hover:-translate-y-1 w-full sm:w-auto justify-center">
+            Start Free Trial
+            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+            </svg>
+          </a>
+          <a href="/pricing" class="inline-flex items-center gap-2 px-8 py-4 rounded-2xl text-base font-semibold text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-all duration-200 w-full sm:w-auto justify-center">
+            View Pricing →
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <%- include('partials/footer') %>
+
+  <!-- Feature Modal Container -->
+  <div id="feature-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
+    <div class="modal-overlay absolute inset-0 bg-gray-900/60 dark:bg-gray-950/80 backdrop-blur-md opacity-0 transition-opacity duration-300 cursor-pointer"></div>
+    <div class="modal-content relative bg-white dark:bg-gray-900 w-full max-w-lg rounded-3xl p-8 shadow-2xl border border-gray-100 dark:border-gray-800 scale-90 opacity-0 transition-all duration-300 translate-y-4">
+      <button class="modal-close absolute top-6 right-6 text-gray-400 hover:text-violet-600 dark:hover:text-white transition-colors focus:outline-none" aria-label="Close modal">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+      <div id="modal-icon-wrapper" class="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-100 to-indigo-100 dark:from-violet-500/20 dark:to-indigo-500/20 flex items-center justify-center mb-6 text-violet-600 dark:text-violet-400">
+        <!-- Icon will be injected here -->
+      </div>
+      <h3 id="modal-title" class="text-2xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-400 bg-clip-text text-transparent"></h3>
+      <p id="modal-details" class="text-gray-500 dark:text-gray-400 leading-relaxed mb-8 text-base"></p>
+      <button class="modal-close w-full py-4 rounded-xl font-bold bg-gradient-to-r from-violet-600 to-indigo-600 text-white hover:from-violet-500 hover:to-indigo-500 transition-all duration-300 shadow-xl shadow-violet-500/20 hover:shadow-violet-500/40">
+        Back to Features
+      </button>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

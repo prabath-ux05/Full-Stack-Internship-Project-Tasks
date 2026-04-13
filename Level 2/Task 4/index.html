@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Profile Builder</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <span>AetherBuilder</span>
+            </div>
+            <div class="progress-wrapper">
+                <div class="progress-header">
+                    <span class="progress-title">Completion</span>
+                    <span class="progress-percentage" id="progress-text">0%</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                    <div class="progress-glow" id="progress-glow"></div>
+                </div>
+                <div class="step-dots">
+                    <div class="step-dot" data-step="0" title="Full Name"></div>
+                    <div class="step-dot" data-step="1" title="Role"></div>
+                    <div class="step-dot" data-step="2" title="Email"></div>
+                    <div class="step-dot" data-step="3" title="Bio"></div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- Form Section -->
+            <section class="editor-section">
+                <div class="section-header">
+                    <h2>Profile Details</h2>
+                    <p>Update your information to see real-time changes.</p>
+                </div>
+
+                <form id="profile-form" class="dynamic-form" novalidate>
+                    <!-- Name Field -->
+                    <div class="form-group" data-field="fullName">
+                        <label for="fullName">Full Name</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="fullName" name="fullName" placeholder="e.g. Jane Doe" autocomplete="off">
+                            <span class="field-icon success-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                            <span class="field-icon error-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span>
+                        </div>
+                        <span class="validation-msg" id="msg-fullName">Name must be at least 3 characters.</span>
+                    </div>
+
+                    <!-- Role Field -->
+                    <div class="form-group" data-field="role">
+                        <label for="role">Professional Role</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="role" name="role" placeholder="e.g. Senior Product Designer" autocomplete="off">
+                            <span class="field-icon success-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                            <span class="field-icon error-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span>
+                        </div>
+                        <span class="validation-msg" id="msg-role">Role is required.</span>
+                    </div>
+
+                    <!-- Email Field -->
+                    <div class="form-group" data-field="email">
+                        <label for="email">Email Address</label>
+                        <div class="input-wrapper">
+                            <input type="email" id="email" name="email" placeholder="jane@example.com" autocomplete="off">
+                            <span class="field-icon success-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                            <span class="field-icon error-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span>
+                        </div>
+                        <span class="validation-msg" id="msg-email">Please enter a valid email address.</span>
+                    </div>
+
+                    <!-- Bio Field -->
+                    <div class="form-group" data-field="bio">
+                        <label for="bio">Short Bio</label>
+                        <div class="input-wrapper">
+                            <textarea id="bio" name="bio" rows="4" placeholder="Tell us about yourself..."></textarea>
+                            <span class="field-icon success-icon textarea-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                            <span class="field-icon error-icon textarea-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span>
+                        </div>
+                        <div class="char-counter"><span id="bio-count">0</span>/150</div>
+                        <span class="validation-msg" id="msg-bio">Bio must be between 10 and 150 characters.</span>
+                    </div>
+
+                    <button type="submit" class="btn-submit" id="submit-btn" disabled>
+                        <span class="btn-text">Save Profile</span>
+                        <span class="btn-loader">
+                            <svg class="spinner" width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-dasharray="31.4 31.4" stroke-linecap="round"></circle></svg>
+                        </span>
+                    </button>
+                </form>
+            </section>
+
+            <!-- Live Preview Section -->
+            <section class="preview-section">
+                <div class="preview-container">
+                    <div class="preview-badge">Live Preview</div>
+                    
+                    <div class="profile-card" id="preview-card">
+                        <div class="card-header">
+                            <div class="avatar-placeholder" id="prev-avatar">JD</div>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="prev-name" id="prev-name">Your Name</h3>
+                            <p class="prev-role" id="prev-role">Your Role</p>
+                            
+                            <div class="contact-pill">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                <span class="prev-email" id="prev-email">email@example.com</span>
+                            </div>
+
+                            <div class="divider"></div>
+                            
+                            <div class="bio-container">
+                                <h4>About</h4>
+                                <p class="prev-bio" id="prev-bio">Your bio will appear here as you type. Make it engaging and concise.</p>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="status-indicator">
+                                <span class="pulse-dot"></span>
+                                Available for work
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Success Toast -->
+        <div class="toast" id="success-toast">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <span>Profile saved successfully!</span>
+        </div>
+
+        <!-- Confetti Canvas -->
+        <canvas id="confetti-canvas"></canvas>
+    </div>
+
+    <script src="app.js" type="module"></script>
+</body>
+</html>

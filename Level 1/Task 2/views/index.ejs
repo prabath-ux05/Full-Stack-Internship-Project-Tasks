@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account — Nexus</title>
+    <meta name="description" content="Sign up with advanced validation and real-time feedback.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { jakarta: ['"Plus Jakarta Sans"', 'sans-serif'] },
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        /* ── Animated border glow ── */
+        .input-ring {
+            position: relative;
+            border-radius: 14px;
+            padding: 1px;
+            background: rgba(255,255,255,0.08);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+        .input-ring:focus-within {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            box-shadow: 0 0 20px -4px rgba(99,102,241,0.35);
+        }
+        .input-ring.error {
+            background: linear-gradient(135deg, #ef4444, #f97316);
+            box-shadow: 0 0 20px -4px rgba(239,68,68,0.3);
+        }
+        .input-ring.success {
+            background: linear-gradient(135deg, #10b981, #34d399);
+            box-shadow: 0 0 20px -4px rgba(16,185,129,0.3);
+        }
+        .input-ring input {
+            border-radius: 13px;
+        }
+
+        /* ── Error message slide ── */
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-6px); max-height: 0; }
+            to   { opacity: 1; transform: translateY(0);    max-height: 40px; }
+        }
+        @keyframes slideUp {
+            from { opacity: 1; transform: translateY(0);    max-height: 40px; }
+            to   { opacity: 0; transform: translateY(-6px); max-height: 0; }
+        }
+        .error-msg-enter { animation: slideDown 0.25s ease forwards; }
+        .error-msg-exit  { animation: slideUp 0.2s ease forwards; }
+
+        /* ── Strength bar segment transition ── */
+        .strength-seg {
+            transition: background-color 0.4s ease, transform 0.3s ease;
+        }
+        .strength-seg.active { transform: scaleY(1.3); }
+
+        /* ── Suggestion dropdown ── */
+        @keyframes popDown {
+            from { opacity: 0; transform: translateY(-4px) scale(0.98); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .suggest-pop { animation: popDown 0.2s ease forwards; }
+
+        /* ── Shake on error ── */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%      { transform: translateX(-5px); }
+            40%      { transform: translateX(5px); }
+            60%      { transform: translateX(-3px); }
+            80%      { transform: translateX(3px); }
+        }
+        .shake { animation: shake 0.35s ease; }
+
+        /* ── Pulse ring on success icon ── */
+        @keyframes pulseRing {
+            0%   { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.6); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4"
+      style="background: #06060e; background-image:
+          radial-gradient(ellipse 80% 50% at 10% 20%, rgba(99,102,241,0.12) 0%, transparent 60%),
+          radial-gradient(ellipse 60% 60% at 90% 80%, rgba(139,92,246,0.10) 0%, transparent 55%);">
+
+    <div class="w-full max-w-[460px]">
+
+        <!-- Logo -->
+        <div class="flex items-center gap-2.5 mb-8">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-500/25">
+                <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+            </div>
+            <span class="text-white font-bold text-lg tracking-tight">Nexus</span>
+        </div>
+
+        <!-- Card -->
+        <div class="bg-white/[0.03] border border-white/[0.07] rounded-[28px] shadow-2xl shadow-black/50 backdrop-blur-md p-9">
+
+            <h1 class="text-[26px] font-extrabold text-white tracking-tight mb-1">Create your account</h1>
+            <p class="text-slate-400 text-sm mb-8">Real-time validation keeps everything secure.</p>
+
+            <!-- ── Server Error Banner ── -->
+            <% if (errors && errors.length > 0) { %>
+            <div id="serverBanner" class="mb-6 rounded-2xl bg-rose-500/10 border border-rose-500/20 p-4 error-msg-enter">
+                <div class="flex items-start gap-3">
+                    <svg class="w-5 h-5 text-rose-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                    </svg>
+                    <ul class="text-rose-300 text-sm space-y-1 list-disc list-inside">
+                        <% errors.forEach(err => { %>
+                            <li><%= err.msg %></li>
+                        <% }) %>
+                    </ul>
+                </div>
+            </div>
+            <% } %>
+
+            <!-- ── Form ── -->
+            <form action="/submit" method="POST" novalidate id="regForm" class="space-y-6">
+
+                <!-- Name Field -->
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <label for="name" class="text-xs font-semibold text-slate-400 uppercase tracking-widest">Full Name</label>
+                        <span id="name-status" class="text-xs font-medium hidden"></span>
+                    </div>
+                    <div class="input-ring" id="name-ring">
+                        <input id="name" name="name" type="text" required autocomplete="name"
+                               value="<%= formData.name || '' %>"
+                               placeholder="John Doe"
+                               class="w-full bg-[#0e0e1a] px-4 py-3.5 text-white text-sm placeholder-slate-600 outline-none">
+                    </div>
+                    <p id="name-error" class="text-rose-400 text-xs font-medium mt-1.5 flex items-center gap-1 overflow-hidden" style="max-height:0;opacity:0;">
+                        <svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                        <span></span>
+                    </p>
+                </div>
+
+                <!-- Email Field -->
+                <div class="relative">
+                    <div class="flex items-center justify-between mb-2">
+                        <label for="email" class="text-xs font-semibold text-slate-400 uppercase tracking-widest">Email Address</label>
+                        <span id="email-status" class="text-xs font-medium hidden"></span>
+                    </div>
+                    <div class="input-ring" id="email-ring">
+                        <input id="email" name="email" type="email" required autocomplete="email"
+                               value="<%= formData.email || '' %>"
+                               placeholder="you@company.com"
+                               class="w-full bg-[#0e0e1a] px-4 py-3.5 text-white text-sm placeholder-slate-600 outline-none">
+                    </div>
+                    <p id="email-error" class="text-rose-400 text-xs font-medium mt-1.5 flex items-center gap-1 overflow-hidden" style="max-height:0;opacity:0;">
+                        <svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                        <span></span>
+                    </p>
+                    <!-- Suggestion dropdown -->
+                    <div id="email-suggestion" class="hidden absolute left-0 right-0 top-[calc(100%+2px)] z-20 bg-[#16162a] border border-white/10 rounded-xl px-4 py-3 text-sm text-slate-300 cursor-pointer hover:bg-white/5 transition-colors suggest-pop shadow-xl shadow-black/40">
+                    </div>
+                </div>
+
+                <!-- Password Field -->
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <label for="password" class="text-xs font-semibold text-slate-400 uppercase tracking-widest">Password</label>
+                        <span id="pw-strength-label" class="text-xs font-semibold hidden"></span>
+                    </div>
+                    <div class="input-ring" id="password-ring">
+                        <div class="flex items-center bg-[#0e0e1a] rounded-[13px]">
+                            <input id="password" name="password" type="password" required autocomplete="new-password"
+                                   placeholder="Min 8 chars, upper + number"
+                                   class="flex-1 bg-transparent px-4 py-3.5 text-white text-sm placeholder-slate-600 outline-none">
+                            <button type="button" id="togglePw" class="pr-4 text-slate-500 hover:text-slate-300 transition-colors" aria-label="Show password">
+                                <svg id="eyeIcon" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <p id="password-error" class="text-rose-400 text-xs font-medium mt-1.5 flex items-center gap-1 overflow-hidden" style="max-height:0;opacity:0;">
+                        <svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                        <span></span>
+                    </p>
+
+                    <!-- Strength bar -->
+                    <div class="flex gap-1.5 mt-3">
+                        <div class="strength-seg h-1 flex-1 rounded-full bg-slate-800 origin-bottom"></div>
+                        <div class="strength-seg h-1 flex-1 rounded-full bg-slate-800 origin-bottom"></div>
+                        <div class="strength-seg h-1 flex-1 rounded-full bg-slate-800 origin-bottom"></div>
+                        <div class="strength-seg h-1 flex-1 rounded-full bg-slate-800 origin-bottom"></div>
+                    </div>
+
+                    <!-- Password rules checklist -->
+                    <div id="pw-rules" class="mt-3 space-y-1.5 hidden">
+                        <div class="rule flex items-center gap-2 text-xs" data-rule="length">
+                            <svg class="w-3.5 h-3.5 rule-icon text-slate-600" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
+                            <span class="text-slate-500">At least 8 characters</span>
+                        </div>
+                        <div class="rule flex items-center gap-2 text-xs" data-rule="upper">
+                            <svg class="w-3.5 h-3.5 rule-icon text-slate-600" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
+                            <span class="text-slate-500">One uppercase letter</span>
+                        </div>
+                        <div class="rule flex items-center gap-2 text-xs" data-rule="number">
+                            <svg class="w-3.5 h-3.5 rule-icon text-slate-600" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
+                            <span class="text-slate-500">One number</span>
+                        </div>
+                        <div class="rule flex items-center gap-2 text-xs" data-rule="special">
+                            <svg class="w-3.5 h-3.5 rule-icon text-slate-600" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
+                            <span class="text-slate-500">One special character</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <button type="submit" id="submitBtn"
+                    class="w-full py-3.5 px-6 rounded-2xl font-bold text-sm text-white
+                           bg-gradient-to-r from-indigo-600 to-violet-600
+                           hover:from-indigo-500 hover:to-violet-500
+                           active:scale-[0.97] transition-all duration-200
+                           shadow-xl shadow-indigo-500/20
+                           focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-[#06060e]
+                           disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:from-indigo-600 disabled:hover:to-violet-600 disabled:active:scale-100">
+                    Create account →
+                </button>
+
+            </form>
+        </div>
+
+        <!-- Footer -->
+        <p class="text-center text-slate-600 text-xs mt-6">
+            Already have an account? <a href="/" class="text-indigo-400 hover:text-indigo-300 font-medium transition-colors">Sign in</a>
+        </p>
+    </div>
+
+    <script src="/js/validation.js"></script>
+</body>
+</html>

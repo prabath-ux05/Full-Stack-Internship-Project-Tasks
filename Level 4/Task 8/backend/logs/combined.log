@@ -1,0 +1,58 @@
+{"level":"info","message":"✨ Scalable Production Backend running on port 5003","service":"task-assistant-service","timestamp":"2026-04-13 18:39:21"}
+{"level":"info","message":"✨ Scalable Production Backend running on port 5003","service":"task-assistant-service","timestamp":"2026-04-13 18:43:38"}
+{"level":"info","message":"::1 - - [13/Apr/2026:13:14:59 +0000] \"GET /health HTTP/1.1\" 200 43 \"-\" \"PostmanRuntime/7.52.0\"","service":"task-assistant-service","timestamp":"2026-04-13 18:44:59"}
+{"level":"info","message":"Adding background job: ANALYTICS","service":"task-assistant-service","timestamp":"2026-04-13 18:45:47"}
+{"level":"info","message":"Worker starting job [ANALYTICS]...","service":"task-assistant-service","timestamp":"2026-04-13 18:45:47"}
+{"level":"info","message":"Adding background job: EMAIL","service":"task-assistant-service","timestamp":"2026-04-13 18:45:47"}
+{"level":"info","message":"Worker starting job [EMAIL]...","service":"task-assistant-service","timestamp":"2026-04-13 18:45:47"}
+{"level":"info","message":"::1 - - [13/Apr/2026:13:15:47 +0000] \"POST /api/assets HTTP/1.1\" 201 90 \"-\" \"PostmanRuntime/7.52.0\"","service":"task-assistant-service","timestamp":"2026-04-13 18:45:47"}
+{"level":"info","message":"Processing analytics for task: 2... DONE","service":"task-assistant-service","timestamp":"2026-04-13 18:45:50"}
+{"level":"info","message":"Sending email to: admin@company.com... DONE","service":"task-assistant-service","timestamp":"2026-04-13 18:45:50"}
+{"level":"info","message":"Adding background job: ANALYTICS","service":"task-assistant-service","timestamp":"2026-04-13 18:46:20"}
+{"level":"info","message":"Worker starting job [ANALYTICS]...","service":"task-assistant-service","timestamp":"2026-04-13 18:46:20"}
+{"level":"info","message":"Adding background job: EMAIL","service":"task-assistant-service","timestamp":"2026-04-13 18:46:20"}
+{"level":"info","message":"Worker starting job [EMAIL]...","service":"task-assistant-service","timestamp":"2026-04-13 18:46:20"}
+{"level":"info","message":"::1 - - [13/Apr/2026:13:16:20 +0000] \"POST /api/assets HTTP/1.1\" 201 165 \"-\" \"PostmanRuntime/7.52.0\"","service":"task-assistant-service","timestamp":"2026-04-13 18:46:20"}
+{"level":"info","message":"Processing analytics for task: 3... DONE","service":"task-assistant-service","timestamp":"2026-04-13 18:46:22"}
+{"level":"info","message":"Sending email to: admin@company.com... DONE","service":"task-assistant-service","timestamp":"2026-04-13 18:46:22"}
+{"level":"info","message":"Cache SET for key: all_assets","service":"task-assistant-service","timestamp":"2026-04-13 18:47:03"}
+{"level":"info","message":"::1 - - [13/Apr/2026:13:17:03 +0000] \"GET /api/assets HTTP/1.1\" 200 230 \"-\" \"PostmanRuntime/7.52.0\"","service":"task-assistant-service","timestamp":"2026-04-13 18:47:03"}
+{"level":"info","message":"Cache HIT for key: all_assets","service":"task-assistant-service","timestamp":"2026-04-13 18:47:49"}
+{"level":"info","message":"::1 - - [13/Apr/2026:13:17:49 +0000] \"GET /api/assets HTTP/1.1\" 200 227 \"-\" \"PostmanRuntime/7.52.0\"","service":"task-assistant-service","timestamp":"2026-04-13 18:47:49"}
+{"level":"info","message":"Cache HIT for key: all_assets","service":"task-assistant-service","timestamp":"2026-04-13 18:48:00"}
+{"level":"info","message":"::1 - - [13/Apr/2026:13:18:00 +0000] \"GET /api/assets HTTP/1.1\" 200 227 \"-\" \"PostmanRuntime/7.52.0\"","service":"task-assistant-service","timestamp":"2026-04-13 18:48:00"}
+{"level":"info","message":"Cache HIT for key: all_assets","service":"task-assistant-service","timestamp":"2026-04-13 18:48:06"}
+{"level":"info","message":"::1 - - [13/Apr/2026:13:18:06 +0000] \"GET /api/assets HTTP/1.1\" 200 227 \"-\" \"PostmanRuntime/7.52.0\"","service":"task-assistant-service","timestamp":"2026-04-13 18:48:06"}
+{"level":"info","message":"Cache HIT for key: all_assets","service":"task-assistant-service","timestamp":"2026-04-13 18:48:17"}
+{"level":"info","message":"::1 - - [13/Apr/2026:13:18:17 +0000] \"GET /api/assets HTTP/1.1\" 200 227 \"-\" \"PostmanRuntime/7.52.0\"","service":"task-assistant-service","timestamp":"2026-04-13 18:48:17"}
+{"level":"info","message":"Adding background job: ANALYTICS","service":"task-assistant-service","timestamp":"2026-04-13 18:48:24"}
+{"level":"info","message":"Worker starting job [ANALYTICS]...","service":"task-assistant-service","timestamp":"2026-04-13 18:48:24"}
+{"level":"info","message":"Adding background job: EMAIL","service":"task-assistant-service","timestamp":"2026-04-13 18:48:24"}
+{"level":"info","message":"Worker starting job [EMAIL]...","service":"task-assistant-service","timestamp":"2026-04-13 18:48:24"}
+{"level":"info","message":"::1 - - [13/Apr/2026:13:18:24 +0000] \"POST /api/assets HTTP/1.1\" 201 165 \"-\" \"PostmanRuntime/7.52.0\"","service":"task-assistant-service","timestamp":"2026-04-13 18:48:24"}
+{"level":"info","message":"Processing analytics for task: 4... DONE","service":"task-assistant-service","timestamp":"2026-04-13 18:48:26"}
+{"level":"info","message":"Sending email to: admin@company.com... DONE","service":"task-assistant-service","timestamp":"2026-04-13 18:48:26"}
+{"level":"info","message":"Cache SET for key: all_assets","service":"task-assistant-service","timestamp":"2026-04-13 18:48:28"}
+{"level":"info","message":"::1 - - [13/Apr/2026:13:18:28 +0000] \"GET /api/assets HTTP/1.1\" 200 314 \"-\" \"PostmanRuntime/7.52.0\"","service":"task-assistant-service","timestamp":"2026-04-13 18:48:28"}
+{"level":"info","message":"✨ Scalable Production Backend running on port 5003","service":"task-assistant-service","timestamp":"2026-04-13 20:23:49"}
+{"level":"info","message":"::1 - - [13/Apr/2026:14:55:09 +0000] \"GET /health HTTP/1.1\" 200 43 \"-\" \"PostmanRuntime/7.52.0\"","service":"task-assistant-service","timestamp":"2026-04-13 20:25:09"}
+{"level":"info","message":"::1 - - [13/Apr/2026:14:56:11 +0000] \"GET /health HTTP/1.1\" 200 43 \"-\" \"PostmanRuntime/7.52.0\"","service":"task-assistant-service","timestamp":"2026-04-13 20:26:11"}
+{"level":"info","message":"Adding background job: ANALYTICS","service":"task-assistant-service","timestamp":"2026-04-13 20:26:19"}
+{"level":"info","message":"Worker starting job [ANALYTICS]...","service":"task-assistant-service","timestamp":"2026-04-13 20:26:19"}
+{"level":"info","message":"Adding background job: EMAIL","service":"task-assistant-service","timestamp":"2026-04-13 20:26:19"}
+{"level":"info","message":"Worker starting job [EMAIL]...","service":"task-assistant-service","timestamp":"2026-04-13 20:26:19"}
+{"level":"info","message":"::1 - - [13/Apr/2026:14:56:19 +0000] \"POST /api/assets HTTP/1.1\" 201 165 \"-\" \"PostmanRuntime/7.52.0\"","service":"task-assistant-service","timestamp":"2026-04-13 20:26:19"}
+{"level":"info","message":"Processing analytics for task: 2... DONE","service":"task-assistant-service","timestamp":"2026-04-13 20:26:21"}
+{"level":"info","message":"Sending email to: admin@company.com... DONE","service":"task-assistant-service","timestamp":"2026-04-13 20:26:21"}
+{"level":"info","message":"::1 - - [13/Apr/2026:14:57:54 +0000] \"GET /health HTTP/1.1\" 200 43 \"-\" \"PostmanRuntime/7.52.0\"","service":"task-assistant-service","timestamp":"2026-04-13 20:27:54"}
+{"level":"info","message":"Adding background job: ANALYTICS","service":"task-assistant-service","timestamp":"2026-04-13 20:28:01"}
+{"level":"info","message":"Worker starting job [ANALYTICS]...","service":"task-assistant-service","timestamp":"2026-04-13 20:28:01"}
+{"level":"info","message":"Adding background job: EMAIL","service":"task-assistant-service","timestamp":"2026-04-13 20:28:01"}
+{"level":"info","message":"Worker starting job [EMAIL]...","service":"task-assistant-service","timestamp":"2026-04-13 20:28:01"}
+{"level":"info","message":"::1 - - [13/Apr/2026:14:58:01 +0000] \"POST /api/assets HTTP/1.1\" 201 165 \"-\" \"PostmanRuntime/7.52.0\"","service":"task-assistant-service","timestamp":"2026-04-13 20:28:01"}
+{"level":"info","message":"Processing analytics for task: 3... DONE","service":"task-assistant-service","timestamp":"2026-04-13 20:28:03"}
+{"level":"info","message":"Sending email to: admin@company.com... DONE","service":"task-assistant-service","timestamp":"2026-04-13 20:28:03"}
+{"level":"info","message":"Cache SET for key: all_assets","service":"task-assistant-service","timestamp":"2026-04-13 20:28:08"}
+{"level":"info","message":"::1 - - [13/Apr/2026:14:58:08 +0000] \"GET /api/assets HTTP/1.1\" 200 305 \"-\" \"PostmanRuntime/7.52.0\"","service":"task-assistant-service","timestamp":"2026-04-13 20:28:08"}
+{"level":"info","message":"Cache HIT for key: all_assets","service":"task-assistant-service","timestamp":"2026-04-13 20:28:22"}
+{"level":"info","message":"::1 - - [13/Apr/2026:14:58:22 +0000] \"GET /api/assets HTTP/1.1\" 200 302 \"-\" \"PostmanRuntime/7.52.0\"","service":"task-assistant-service","timestamp":"2026-04-13 20:28:22"}

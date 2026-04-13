@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aether Dashboard — Manage your projects, track progress, and collaborate with your team.">
+  <title><%= title %></title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'] },
+          animation: {
+            'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
+            'scale-in': 'scaleIn 0.4s ease-out forwards',
+            'slide-in': 'slideIn 0.5s ease-out forwards',
+            'count-up': 'countUp 0.6s ease-out forwards',
+          },
+          keyframes: {
+            fadeInUp: { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+            scaleIn: { '0%': { opacity: '0', transform: 'scale(0.95)' }, '100%': { opacity: '1', transform: 'scale(1)' } },
+            slideIn: { '0%': { opacity: '0', transform: 'translateX(-10px)' }, '100%': { opacity: '1', transform: 'translateX(0)' } },
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="font-sans antialiased bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-500">
+
+  <%- include('partials/navbar') %>
+
+  <main class="pt-20 pb-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Dashboard header -->
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8 animate-fade-in-up opacity-0" style="animation-delay: 0.1s">
+        <div>
+          <p class="text-sm text-gray-400 dark:text-gray-500 font-medium mb-1">Good evening 👋</p>
+          <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">Dashboard Overview</h1>
+        </div>
+        <div class="flex items-center gap-3">
+          <button class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-violet-300 dark:hover:border-violet-500/40 hover:shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-violet-500/50">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+            Filter
+          </button>
+          <button onclick="openCreateProjectModal()" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 shadow-lg shadow-violet-500/20 hover:shadow-violet-500/30 transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-violet-500/50">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+            New Project
+          </button>
+        </div>
+      </div>
+
+      <!-- Stats grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-8">
+        <% stats.forEach((stat, i) => { %>
+          <div class="group relative rounded-2xl p-5 lg:p-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-violet-300 dark:hover:border-violet-500/40 hover:shadow-xl hover:shadow-violet-500/5 transition-all duration-500 hover:-translate-y-1 animate-fade-in-up opacity-0" style="animation-delay: <%= 0.1 + i * 0.1 %>s">
+            <div class="flex items-start justify-between mb-3">
+              <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-violet-100 to-indigo-100 dark:from-violet-500/15 dark:to-indigo-500/15 flex items-center justify-center group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-violet-500/15 transition-all duration-300">
+                <% if (stat.icon === 'folder') { %>
+                  <svg class="w-5 h-5 text-violet-600 dark:text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+                <% } else if (stat.icon === 'users') { %>
+                  <svg class="w-5 h-5 text-violet-600 dark:text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                <% } else if (stat.icon === 'check-circle') { %>
+                  <svg class="w-5 h-5 text-violet-600 dark:text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <% } else { %>
+                  <svg class="w-5 h-5 text-violet-600 dark:text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                <% } %>
+              </div>
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10">
+                <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+                <%= stat.change %>
+              </span>
+            </div>
+            <div class="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-1"><%= stat.value %></div>
+            <div class="text-sm text-gray-400 dark:text-gray-500 font-medium"><%= stat.label %></div>
+          </div>
+        <% }) %>
+      </div>
+
+      <!-- Main content grid -->
+      <div class="grid lg:grid-cols-3 gap-6 lg:gap-8">
+        
+        <!-- Projects list (2 cols) -->
+        <div class="lg:col-span-2 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 overflow-hidden animate-fade-in-up opacity-0" style="animation-delay: 0.5s">
+          <div class="flex items-center justify-between px-6 py-5 border-b border-gray-100 dark:border-gray-800">
+            <div>
+              <h2 class="text-lg font-bold text-gray-900 dark:text-white">Active Projects</h2>
+              <p class="text-sm text-gray-400 dark:text-gray-500 mt-0.5">Track progress across your team</p>
+            </div>
+            <button class="text-sm font-medium text-violet-600 dark:text-violet-400 hover:text-violet-500 dark:hover:text-violet-300 transition-colors duration-200">View All →</button>
+          </div>
+          
+          <div id="projects-list" class="divide-y divide-gray-100 dark:divide-gray-800">
+            <% projects.forEach((project, i) => { %>
+              <div class="project-card group flex items-center gap-4 px-6 py-4 hover:bg-gray-50 dark:hover:bg-gray-800/40 transition-all duration-200 cursor-pointer">
+                <!-- Color indicator -->
+                <div class="w-10 h-10 rounded-xl flex-shrink-0 flex items-center justify-center text-white text-sm font-bold shadow-md" style="background: <%= project.color %>; box-shadow: 0 4px 14px <%= project.color %>33">
+                  <%= project.name.charAt(0) %>
+                </div>
+                
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center justify-between mb-1.5">
+                    <h3 class="text-sm font-semibold text-gray-900 dark:text-white truncate group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors duration-200"><%= project.name %></h3>
+                    <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+                      <% if (project.status === 'Completed') { %>
+                        bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400
+                      <% } else if (project.status === 'Review') { %>
+                        bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400
+                      <% } else { %>
+                        bg-violet-50 dark:bg-violet-500/10 text-violet-600 dark:text-violet-400
+                      <% } %>
+                    "><%= project.status %></span>
+                  </div>
+                  
+                  <!-- Progress bar -->
+                  <div class="flex items-center gap-3">
+                    <div class="flex-1 h-2 rounded-full bg-gray-100 dark:bg-gray-800 overflow-hidden">
+                      <div class="h-full rounded-full transition-all duration-1000 ease-out bg-gradient-to-r from-violet-500 to-indigo-500" style="width: <%= project.progress %>%"></div>
+                    </div>
+                    <span class="text-xs font-semibold text-gray-400 dark:text-gray-500 w-8 text-right"><%= project.progress %>%</span>
+                  </div>
+                </div>
+
+                <!-- Team count -->
+                <div class="hidden sm:flex items-center gap-1.5 text-xs text-gray-400 dark:text-gray-500 flex-shrink-0">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                  <%= project.teamMembers %>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-6">
+          
+          <!-- Activity feed -->
+          <div class="rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 overflow-hidden animate-fade-in-up opacity-0" style="animation-delay: 0.6s">
+            <div class="px-6 py-5 border-b border-gray-100 dark:border-gray-800">
+              <h2 class="text-lg font-bold text-gray-900 dark:text-white">Recent Activity</h2>
+            </div>
+            <div class="px-6 py-4 space-y-4">
+              <% const activities = [
+                { user: 'AK', name: 'Alex Kim', action: 'completed', target: 'API endpoint task', time: '2m ago', color: 'from-emerald-400 to-teal-500' },
+                { user: 'JD', name: 'Jane Doe', action: 'commented on', target: 'Design review', time: '15m ago', color: 'from-violet-500 to-indigo-600' },
+                { user: 'MR', name: 'Max Reed', action: 'pushed to', target: 'main branch', time: '1h ago', color: 'from-amber-400 to-orange-500' },
+                { user: 'SL', name: 'Sarah Lin', action: 'created', target: 'Sprint 42', time: '3h ago', color: 'from-pink-500 to-rose-600' },
+                { user: 'TC', name: 'Tom Cruz', action: 'deployed', target: 'v2.1.4', time: '5h ago', color: 'from-cyan-400 to-blue-500' }
+              ] %>
+              <% activities.forEach(a => { %>
+                <div class="group flex items-start gap-3 cursor-pointer">
+                  <div class="w-8 h-8 rounded-lg bg-gradient-to-br <%= a.color %> flex items-center justify-center text-white text-xs font-bold flex-shrink-0 shadow-sm group-hover:scale-110 transition-transform duration-200"><%= a.user %></div>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                      <span class="font-semibold text-gray-900 dark:text-white"><%= a.name %></span>
+                      <span class="text-gray-400 dark:text-gray-500"> <%= a.action %> </span>
+                      <span class="font-medium text-gray-700 dark:text-gray-300"><%= a.target %></span>
+                    </p>
+                    <span class="text-xs text-gray-400 dark:text-gray-500"><%= a.time %></span>
+                  </div>
+                </div>
+              <% }) %>
+            </div>
+          </div>
+
+          <!-- Quick actions -->
+          <div class="rounded-2xl bg-gradient-to-br from-violet-600 to-indigo-700 dark:from-violet-800 dark:to-indigo-900 p-6 text-white shadow-xl shadow-violet-500/20 animate-fade-in-up opacity-0" style="animation-delay: 0.7s">
+            <h3 class="text-lg font-bold mb-2">Upgrade to Pro</h3>
+            <p class="text-sm text-violet-200 mb-5 leading-relaxed">Unlock advanced analytics, unlimited projects, and priority support.</p>
+            <a href="/pricing" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold bg-white text-violet-700 hover:bg-gray-100 shadow-lg transition-all duration-200 hover:-translate-y-0.5">
+              View Plans
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <%- include('partials/footer') %>
+
+  <!-- Create Project Modal -->
+  <div id="project-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
+    <div onclick="closeCreateProjectModal()" class="absolute inset-0 bg-gray-900/60 backdrop-blur-md transition-opacity"></div>
+    <div class="relative bg-white dark:bg-gray-900 w-full max-w-lg rounded-3xl p-8 shadow-2xl border border-gray-100 dark:border-gray-800 animate-fade-in-up">
+      <h2 class="text-2xl font-bold mb-6">Create New Project</h2>
+      <form id="create-project-form" class="space-y-4">
+        <div>
+          <label class="block text-sm font-semibold mb-2">Project Name</label>
+          <input type="text" id="proj-name" name="name" required class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:border-violet-500 outline-none transition-all">
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-2">Description</label>
+          <textarea id="proj-desc" name="description" rows="3" required class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:border-violet-500 outline-none transition-all"></textarea>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-2">Team Members (Optional)</label>
+          <input type="number" id="proj-team" name="teamMembers" min="1" value="1" class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:border-violet-500 outline-none transition-all">
+        </div>
+        <div class="pt-4 flex gap-3">
+          <button type="button" onclick="closeCreateProjectModal()" class="flex-1 py-3 px-4 rounded-xl font-semibold bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 transition-colors">Cancel</button>
+          <button type="submit" class="flex-1 py-3 px-4 rounded-xl font-bold text-white bg-gradient-to-r from-violet-600 to-indigo-600 hover:opacity-90 shadow-lg shadow-violet-500/20">Create Project</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function openCreateProjectModal() {
+      document.getElementById('project-modal').classList.remove('hidden');
+      document.getElementById('project-modal').classList.add('flex');
+    }
+
+    function closeCreateProjectModal() {
+      document.getElementById('project-modal').classList.add('hidden');
+      document.getElementById('project-modal').classList.remove('flex');
+    }
+
+    document.getElementById('create-project-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('proj-name').value;
+      const description = document.getElementById('proj-desc').value;
+      const teamMembers = document.getElementById('proj-team').value;
+
+      try {
+        const res = await fetch('/api/projects', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, description, teamMembers })
+        });
+        
+        const result = await res.json();
+        if (result.success) {
+          addProjectToUI(result.data);
+          closeCreateProjectModal();
+          document.getElementById('create-project-form').reset();
+        }
+      } catch (err) {
+        console.error('Error creating project:', err);
+      }
+    });
+
+    function addProjectToUI(project) {
+      const list = document.getElementById('projects-list');
+      const html = `
+        <div class="project-card group flex items-center gap-4 px-6 py-4 hover:bg-gray-50 dark:hover:bg-gray-800/40 transition-all duration-200 cursor-pointer animate-fade-in-up">
+          <div class="w-10 h-10 rounded-xl flex-shrink-0 flex items-center justify-center text-white text-sm font-bold shadow-md" style="background: ${project.color}; box-shadow: 0 4px 14px ${project.color}33">
+            ${project.name.charAt(0)}
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center justify-between mb-1.5">
+              <h3 class="text-sm font-semibold text-gray-900 dark:text-white truncate group-hover:text-violet-600 transition-colors">${project.name}</h3>
+              <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-violet-50 dark:bg-violet-500/10 text-violet-600 dark:text-violet-400">In Progress</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="flex-1 h-2 rounded-full bg-gray-100 dark:bg-gray-800 overflow-hidden">
+                <div class="h-full rounded-full bg-gradient-to-r from-violet-500 to-indigo-500" style="width: 0%"></div>
+              </div>
+              <span class="text-xs font-semibold text-gray-400 dark:text-gray-500 w-8 text-right">0%</span>
+            </div>
+          </div>
+          <div class="hidden sm:flex items-center gap-1.5 text-xs text-gray-400 dark:text-gray-500 flex-shrink-0">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            ${project.teamMembers}
+          </div>
+        </div>
+      `;
+      list.insertAdjacentHTML('afterbegin', html);
+    }
+  </script>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

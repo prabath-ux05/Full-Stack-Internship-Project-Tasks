@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome — Nexus</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        @keyframes popIn { 0% { transform: scale(0.7); opacity: 0; } 70% { transform: scale(1.06); } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulseRing { 0% { transform: scale(1); opacity: 0.4; } 100% { transform: scale(1.8); opacity: 0; } }
+        .anim-pop   { animation: popIn 0.55s cubic-bezier(0.16,1,0.3,1) both; }
+        .anim-f1    { animation: fadeUp 0.4s ease 0.12s both; }
+        .anim-f2    { animation: fadeUp 0.4s ease 0.26s both; }
+        .anim-f3    { animation: fadeUp 0.4s ease 0.40s both; }
+        .pulse-ring { animation: pulseRing 2s ease-out infinite; }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-6"
+      style="background: #06060e; background-image:
+          radial-gradient(ellipse 70% 50% at 20% 30%, rgba(16,185,129,0.1) 0%, transparent 60%),
+          radial-gradient(ellipse 60% 50% at 80% 70%, rgba(99,102,241,0.08) 0%, transparent 55%);">
+
+    <div class="w-full max-w-md text-center">
+
+        <!-- Animated check icon -->
+        <div class="relative inline-flex justify-center mb-8 anim-pop">
+            <div class="w-24 h-24 rounded-3xl bg-gradient-to-br from-emerald-500/20 to-teal-500/10 border border-emerald-500/20 flex items-center justify-center">
+                <svg class="w-12 h-12 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                </svg>
+            </div>
+            <div class="absolute inset-0 rounded-3xl border border-emerald-400/20 pulse-ring"></div>
+        </div>
+
+        <!-- Card -->
+        <div class="bg-white/[0.03] border border-white/[0.07] rounded-[28px] shadow-2xl shadow-black/50 backdrop-blur-md p-9">
+
+            <div class="anim-f1">
+                <h1 class="text-2xl font-extrabold text-white tracking-tight mb-2">Welcome, <%= user.name %>! 🎉</h1>
+                <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                    Your account linked to <span class="text-indigo-400 font-semibold"><%= user.email %></span> is ready.
+                </p>
+            </div>
+
+            <!-- Recent users -->
+            <div class="anim-f2 border-t border-white/5 pt-6 text-left">
+                <p class="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-4">
+                    All Registrations <span class="ml-1 bg-indigo-500/20 text-indigo-400 px-1.5 py-0.5 rounded-md font-bold"><%= allUsers.length %></span>
+                </p>
+                <div class="space-y-2 max-h-48 overflow-y-auto pr-1">
+                    <% allUsers.slice().reverse().forEach((u, i) => { %>
+                    <div class="flex items-center gap-3 bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 hover:bg-white/[0.05] transition-colors">
+                        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+                            <%= u.name.charAt(0).toUpperCase() %>
+                        </div>
+                        <div class="min-w-0 flex-1">
+                            <p class="text-white text-sm font-semibold truncate"><%= u.name %></p>
+                            <p class="text-slate-500 text-xs truncate"><%= u.email %></p>
+                        </div>
+                        <span class="text-slate-700 text-xs font-mono">#<%= allUsers.length - i %></span>
+                    </div>
+                    <% }) %>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="anim-f3 mt-7">
+                <a href="/"
+                   class="flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-2xl font-bold text-sm text-white
+                          bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500
+                          active:scale-[0.97] transition-all duration-200 shadow-xl shadow-indigo-500/20">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+                    </svg>
+                    Register another user
+                </a>
+            </div>
+        </div>
+
+        <p class="text-slate-700 text-xs mt-6">Nexus · Task 2 — Advanced Validation</p>
+    </div>
+</body>
+</html>

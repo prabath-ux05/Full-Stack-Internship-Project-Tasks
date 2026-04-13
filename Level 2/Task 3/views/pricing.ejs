@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aether Pricing — Simple, transparent pricing for every team size. Start free, scale as you grow.">
+  <title><%= title %></title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'] },
+          animation: {
+            'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
+          },
+          keyframes: {
+            fadeInUp: { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="font-sans antialiased bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-500">
+
+  <%- include('partials/navbar') %>
+
+  <main class="pt-20">
+    
+    <!-- Pricing Header -->
+    <section class="relative py-20 lg:py-28 overflow-hidden">
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-violet-500/5 dark:bg-violet-500/10 rounded-full blur-3xl"></div>
+      </div>
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-50 dark:bg-violet-500/10 text-violet-600 dark:text-violet-400 text-xs font-semibold uppercase tracking-wider mb-4 animate-fade-in-up opacity-0" style="animation-delay: 0.1s">
+            Pricing
+          </div>
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 animate-fade-in-up opacity-0" style="animation-delay: 0.2s">
+            Simple pricing, <span class="bg-gradient-to-r from-violet-600 to-indigo-600 dark:from-violet-400 dark:to-indigo-400 bg-clip-text text-transparent">no surprises</span>
+          </h1>
+          <p class="text-lg text-gray-500 dark:text-gray-400 leading-relaxed animate-fade-in-up opacity-0" style="animation-delay: 0.3s">
+            Start free and scale as your team grows. All plans include a 14-day trial.
+          </p>
+
+          <!-- Billing toggle -->
+          <div class="flex items-center justify-center gap-4 mt-8 animate-fade-in-up opacity-0" style="animation-delay: 0.4s">
+            <span class="text-sm font-medium text-gray-500 dark:text-gray-400" id="monthly-label">Monthly</span>
+            <button id="billing-toggle" class="relative w-14 h-7 rounded-full bg-gray-200 dark:bg-gray-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:ring-offset-2 dark:focus:ring-offset-gray-950" aria-label="Toggle billing period">
+              <div id="billing-knob" class="absolute top-0.5 left-0.5 w-6 h-6 rounded-full bg-white shadow-md transition-transform duration-300"></div>
+            </button>
+            <span class="text-sm font-medium text-gray-500 dark:text-gray-400" id="annual-label">
+              Annual
+              <span class="ml-1 inline-flex px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">-20%</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Pricing Cards -->
+        <div class="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto">
+          
+          <!-- Starter -->
+          <div class="group relative rounded-2xl p-6 lg:p-8 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-violet-300 dark:hover:border-violet-500/40 hover:shadow-xl hover:shadow-violet-500/5 transition-all duration-500 hover:-translate-y-2 animate-fade-in-up opacity-0" style="animation-delay: 0.4s">
+            <div class="mb-6">
+              <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-1">Starter</h3>
+              <p class="text-sm text-gray-500 dark:text-gray-400">Perfect for small teams getting started.</p>
+            </div>
+            <div class="mb-6">
+              <div class="flex items-baseline gap-1">
+                <span class="text-4xl font-extrabold text-gray-900 dark:text-white price-monthly">$0</span>
+                <span class="text-4xl font-extrabold text-gray-900 dark:text-white price-annual hidden">$0</span>
+                <span class="text-sm text-gray-400 dark:text-gray-500 font-medium">/ month</span>
+              </div>
+            </div>
+            <ul class="space-y-3 mb-8">
+              <% const starterFeatures = ['Up to 5 team members', '3 active projects', 'Basic analytics', 'Email support', '1 GB storage'] %>
+              <% starterFeatures.forEach(f => { %>
+                <li class="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-400">
+                  <svg class="w-5 h-5 text-emerald-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                  <%= f %>
+                </li>
+              <% }) %>
+            </ul>
+            <a href="/signup?plan=starter" class="block w-full text-center px-6 py-3 rounded-xl text-sm font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700 transition-all duration-200 hover:shadow-md">
+              Get Started Free
+            </a>
+          </div>
+
+          <!-- Pro (Popular) -->
+          <div class="group relative rounded-2xl p-6 lg:p-8 bg-gradient-to-b from-white to-violet-50/50 dark:from-gray-900 dark:to-violet-950/30 border-2 border-violet-500 dark:border-violet-500/60 shadow-xl shadow-violet-500/10 hover:shadow-2xl hover:shadow-violet-500/20 transition-all duration-500 hover:-translate-y-2 animate-fade-in-up opacity-0" style="animation-delay: 0.5s">
+            <!-- Popular badge -->
+            <div class="absolute -top-3.5 left-1/2 -translate-x-1/2">
+              <span class="inline-flex items-center gap-1 px-4 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r from-violet-600 to-indigo-600 shadow-lg shadow-violet-500/30">
+                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                Most Popular
+              </span>
+            </div>
+            <div class="mb-6">
+              <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-1">Pro</h3>
+              <p class="text-sm text-gray-500 dark:text-gray-400">For growing teams that need more power.</p>
+            </div>
+            <div class="mb-6">
+              <div class="flex items-baseline gap-1">
+                <span class="text-4xl font-extrabold text-gray-900 dark:text-white price-monthly">$19</span>
+                <span class="text-4xl font-extrabold text-gray-900 dark:text-white price-annual hidden">$15</span>
+                <span class="text-sm text-gray-400 dark:text-gray-500 font-medium">/ user / month</span>
+              </div>
+            </div>
+            <ul class="space-y-3 mb-8">
+              <% const proFeatures = ['Unlimited team members', 'Unlimited projects', 'Advanced analytics', 'Priority support', '100 GB storage', 'Custom integrations', 'SSO & 2FA'] %>
+              <% proFeatures.forEach(f => { %>
+                <li class="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-400">
+                  <svg class="w-5 h-5 text-violet-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                  <%= f %>
+                </li>
+              <% }) %>
+            </ul>
+            <a href="/signup?plan=pro" class="block w-full text-center px-6 py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40 transition-all duration-300 hover:-translate-y-0.5">
+              Start 14-Day Trial
+            </a>
+          </div>
+
+          <!-- Enterprise -->
+          <div class="group relative rounded-2xl p-6 lg:p-8 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-violet-300 dark:hover:border-violet-500/40 hover:shadow-xl hover:shadow-violet-500/5 transition-all duration-500 hover:-translate-y-2 animate-fade-in-up opacity-0" style="animation-delay: 0.6s">
+            <div class="mb-6">
+              <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-1">Enterprise</h3>
+              <p class="text-sm text-gray-500 dark:text-gray-400">For organizations that need it all.</p>
+            </div>
+            <div class="mb-6">
+              <div class="flex items-baseline gap-1">
+                <span class="text-4xl font-extrabold text-gray-900 dark:text-white">Custom</span>
+              </div>
+            </div>
+            <ul class="space-y-3 mb-8">
+              <% const enterpriseFeatures = ['Everything in Pro', 'Unlimited storage', 'Dedicated account manager', '99.99% SLA', 'Custom contracts', 'On-premise option', 'Advanced security'] %>
+              <% enterpriseFeatures.forEach(f => { %>
+                <li class="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-400">
+                  <svg class="w-5 h-5 text-emerald-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                  <%= f %>
+                </li>
+              <% }) %>
+            </ul>
+            <a href="#" class="block w-full text-center px-6 py-3 rounded-xl text-sm font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700 transition-all duration-200 hover:shadow-md">
+              Contact Sales
+            </a>
+          </div>
+        </div>
+
+        <!-- FAQ section -->
+        <div class="max-w-3xl mx-auto mt-20 lg:mt-28">
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-center mb-10 tracking-tight">Frequently Asked Questions</h2>
+          
+          <div class="space-y-4" id="faq-container">
+            <% const faqs = [
+              { q: 'Can I switch plans later?', a: 'Absolutely! You can upgrade or downgrade your plan at any time. Changes take effect immediately, and we\'ll prorate any differences.' },
+              { q: 'Is there a free trial?', a: 'Yes! All paid plans include a 14-day free trial. No credit card required to get started.' },
+              { q: 'What happens when my trial ends?', a: 'You\'ll be automatically moved to the free Starter plan. No charges, no surprises. You can upgrade whenever you\'re ready.' },
+              { q: 'Do you offer team discounts?', a: 'Yes, we offer volume discounts for teams of 50+. Contact our sales team for a custom quote tailored to your needs.' },
+              { q: 'Can I cancel anytime?', a: 'Of course. There are no long-term contracts or cancellation fees. You can cancel your subscription at any time from your account settings.' }
+            ] %>
+            <% faqs.forEach((faq, i) => { %>
+              <div class="faq-item rounded-2xl border border-gray-200 dark:border-gray-800 overflow-hidden transition-all duration-300 hover:border-violet-300 dark:hover:border-violet-500/40">
+                <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none focus:ring-2 focus:ring-inset focus:ring-violet-500/50" onclick="toggleFaq(this)">
+                  <span class="text-sm font-semibold text-gray-900 dark:text-white pr-4"><%= faq.q %></span>
+                  <svg class="faq-chevron w-5 h-5 text-gray-400 dark:text-gray-500 flex-shrink-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                  </svg>
+                </button>
+                <div class="faq-content max-h-0 overflow-hidden transition-all duration-300">
+                  <p class="px-6 pb-5 text-sm text-gray-500 dark:text-gray-400 leading-relaxed"><%= faq.a %></p>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 relative overflow-hidden">
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-violet-500/5 dark:bg-violet-500/10 rounded-full blur-3xl"></div>
+      </div>
+      <div class="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-4">Still have questions?</h2>
+        <p class="text-gray-500 dark:text-gray-400 mb-8">Our team is here to help you find the perfect plan for your needs.</p>
+        <a href="#" class="inline-flex items-center gap-2 px-8 py-4 rounded-2xl text-base font-semibold text-white bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 shadow-xl shadow-violet-500/25 hover:shadow-violet-500/40 transition-all duration-300 hover:-translate-y-1">
+          Talk to Sales
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <%- include('partials/footer') %>
+
+  <script src="/js/main.js"></script>
+  <script>
+    // Billing toggle
+    const billingToggle = document.getElementById('billing-toggle');
+    const billingKnob = document.getElementById('billing-knob');
+    let isAnnual = false;
+
+    billingToggle?.addEventListener('click', () => {
+      isAnnual = !isAnnual;
+      billingKnob.style.transform = isAnnual ? 'translateX(28px)' : 'translateX(0)';
+      billingToggle.classList.toggle('bg-violet-600', isAnnual);
+      billingToggle.classList.toggle('dark:bg-violet-600', isAnnual);
+      billingToggle.classList.toggle('bg-gray-200', !isAnnual);
+      billingToggle.classList.toggle('dark:bg-gray-700', !isAnnual);
+
+      document.querySelectorAll('.price-monthly').forEach(el => el.classList.toggle('hidden', isAnnual));
+      document.querySelectorAll('.price-annual').forEach(el => el.classList.toggle('hidden', !isAnnual));
+    });
+
+    // FAQ accordion
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const content = item.querySelector('.faq-content');
+      const chevron = item.querySelector('.faq-chevron');
+      const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+
+      // Close all
+      document.querySelectorAll('.faq-item').forEach(faq => {
+        faq.querySelector('.faq-content').style.maxHeight = '0px';
+        faq.querySelector('.faq-chevron').style.transform = 'rotate(0deg)';
+      });
+
+      // Open clicked (if was closed)
+      if (!isOpen) {
+        content.style.maxHeight = content.scrollHeight + 'px';
+        chevron.style.transform = 'rotate(180deg)';
+      }
+    }
+  </script>
+</body>
+</html>
